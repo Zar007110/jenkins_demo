@@ -1,29 +1,21 @@
 pipeline {
     agent any
-    
-    environment {
-        APP_NAME = "hello-world"
-    }
-    
-    when {
-        branch "master"
-    }
-    
+
     stages {
-        stage('Build') {
+        stage('staging') {
             steps {
-                echo 'Building...'
+                script {
+                    echo 'Hello World'
+                    sh 'ssh ubuntu@13.231.38.229 "echo Hello World"'
+                }
             }
         }
-        stage('Test') {
+        stage('production') {
             steps {
-                echo 'Testing...'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                echo "Application Name: ${env.APP_NAME}"
+                script {
+                    echo 'Hello World'
+                    sh 'ssh ubuntu@13.231.138.224 "echo Hello World"'
+                }
             }
         }
     }
